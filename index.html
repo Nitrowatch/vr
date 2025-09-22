@@ -6,7 +6,12 @@
     <a-scene>
       <a-assets>
         <!-- Sky texture -->
-        <img id="skyTex" src="background-2412732.jpg">
+        <img id="skyTex" src="plain_starfield_1.png">
+        <!-- ISS Model -->
+        <a-asset-item id="issModel" src="scene.gltf"></a-asset-item>
+        <!-- If you have a .glb file instead, use:
+        <a-asset-item id="issModel" src="iss.glb"></a-asset-item>
+        -->
       </a-assets>
 
       <!-- Sky -->
@@ -20,6 +25,9 @@
 
       <!-- Large yellow floor -->
       <a-plane position="0 0 0" rotation="-90 0 0" width="100" height="100" color="yellow"></a-plane>
+
+      <!-- ISS Model placed 10m behind the cube/sphere -->
+      <a-entity gltf-model="#issModel" position="0 2 -14" scale="0.3 0.3 0.3"></a-entity>
 
       <!-- Camera rig -->
       <a-entity id="rig" position="0 1.6 0">
@@ -59,4 +67,3 @@
     </script>
   </body>
 </html>
-

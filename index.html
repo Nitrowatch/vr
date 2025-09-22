@@ -31,19 +31,29 @@
       const rig = document.querySelector('#rig');
       const camera = document.querySelector('#playerCam');
 
-      function moveForward() {
+      const speed = 1.5; // movement speed in units per second
+      let lastTime = null;
+
+      function moveForward(delta) {
         const rotation = camera.object3D.rotation;
-        rig.object3D.position.z -= Math.cos(rotation.y) * 0.05;
-        rig.object3D.position.x -= Math.sin(rotation.y) * 0.05;
+        rig.object3D.position.z -= Math.cos(rotation.y) * speed * delta;
+        rig.object3D.position.x -= Math.sin(rotation.y) * speed * delta;
       }
 
-      // Check head tilt (look DOWN = walk forward)
-      setInterval(() => {
+      function animate(time) {
+        if (!lastTime) lastTime = time;
+        const delta = (time - lastTime) / 1000; // convert ms to seconds
+        lastTime = time;
+
         const pitch = THREE.MathUtils.radToDeg(camera.object3D.rotation.x);
-        if (pitch < -20) { // negative = looking down
-          moveForward();
+        if (pitch < -20) { // look down threshold
+          moveForward(delta);
         }
-      }, 100);
+
+        requestAnimationFrame(animate);
+      }
+
+      requestAnimationFrame(animate);
     </script>
   </body>
 </html>

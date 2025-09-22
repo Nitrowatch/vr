@@ -37,10 +37,10 @@
         rig.object3D.position.x -= Math.sin(rotation.y) * 0.05;
       }
 
-      // Check head tilt (look down = walk forward)
+      // Check head tilt (look DOWN = walk forward)
       setInterval(() => {
         const pitch = THREE.MathUtils.radToDeg(camera.object3D.rotation.x);
-        if (pitch > 20) { // if looking down more than ~20 degrees
+        if (pitch < -20) { // negative = looking down
           moveForward();
         }
       }, 100);

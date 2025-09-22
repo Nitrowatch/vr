@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <!-- Replace this with your own space texture -->
+        <img id="skyTex" src="plain_starfield_1.png">
+      </a-assets>
+
+      <!-- Sky with texture -->
+      <a-sky src="#skyTex"></a-sky>
+
+      <!-- Floating red box -->
+      <a-box position="-1 1.5 -3" rotation="0 45 0" color="red"></a-box>
+
+      <!-- Floating green sphere -->
+      <a-sphere position="1 2 -4" radius="1" color="green"></a-sphere>
+
+      <!-- Yellow floor -->
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="10" height="10" color="yellow"></a-plane>
+
+      <!-- Camera -->
+      <a-entity camera look-controls wasd-controls position="0 1.6 0"></a-entity>
+    </a-scene>
+  </body>
+</html>

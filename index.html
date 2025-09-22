@@ -21,10 +21,29 @@
       <!-- Yellow floor -->
       <a-plane position="0 0 -4" rotation="-90 0 0" width="10" height="10" color="yellow"></a-plane>
 
-      <!-- Camera -->
-      <a-entity camera look-controls wasd-controls position="0 1.6 0"></a-entity>
+      <!-- Rig that holds the camera -->
+      <a-entity id="rig" position="0 1.6 0">
+        <a-entity id="playerCam" camera look-controls></a-entity>
+      </a-entity>
     </a-scene>
+
+    <script>
+      const rig = document.querySelector('#rig');
+      const camera = document.querySelector('#playerCam');
+
+      function moveForward() {
+        const rotation = camera.object3D.rotation;
+        rig.object3D.position.z -= Math.cos(rotation.y) * 0.05;
+        rig.object3D.position.x -= Math.sin(rotation.y) * 0.05;
+      }
+
+      // Check head tilt (look down = walk forward)
+      setInterval(() => {
+        const pitch = THREE.MathUtils.radToDeg(camera.object3D.rotation.x);
+        if (pitch > 20) { // if looking down more than ~20 degrees
+          moveForward();
+        }
+      }, 100);
+    </script>
   </body>
 </html>
-
-
